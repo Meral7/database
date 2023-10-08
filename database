@@ -1,0 +1,556 @@
+use master
+create database faculty_of_science
+go
+use faculty_of_science
+go
+create schema math_department
+go
+create table math_department.student(
+full_name nvarchar (100) not null,
+student_no int primary key not null,
+class int not null,
+major varchar (30) not null,
+email varchar (30),
+__level int not null
+);
+go
+create table math_department.courses(
+course_name varchar (100) not null,
+course_no varchar (30) primary key not null,
+credit_hr int not null check(credit_hr between 1 and 3),
+sub_department varchar (30) not null,
+lecturer nvarchar(30),
+_lev int not null,
+semester varchar(10) not null,
+optionarry varchar(10) not null,
+student_id int foreign key(student_id)
+references math_department.student (student_no)
+);
+go
+create table math_department.prerequisite(
+course_id varchar(30) not null foreign key (course_id)
+references math_department.courses (course_no),
+course_na varchar(100) not null,
+preq_no varchar (30) not null,
+preq_name varchar(100) not null
+)
+go
+create table math_department.section(
+section_id varchar (30) primary key not null,
+course_number varchar(30) not null foreign key (course_number)
+references math_department.courses (course_no),
+semester int not null,
+Year_ int not null,
+instructor nvarchar (30) not null,
+level_ int not null
+);
+go
+create table math_department.grade_report(
+student_id int not null foreign key(student_id)
+references math_department.student(student_no),
+section_no varchar(30) not null foreign key (section_no)
+references math_department.section (section_id),
+grade varchar (10)
+)
+go 
+create unique index idx_email_notnull
+on math_department.student(email)
+where email is not null;
+go
+create schema st_department
+go
+create table st_department.student(
+full_name nvarchar (100) not null,
+student_no int primary key not null,
+class int not null,
+major varchar (30) not null,
+email varchar (30),
+__level int not null
+);
+go
+create table st_department.courses(
+course_name varchar (100) not null,
+course_no varchar (30) primary key not null,
+credit_hr int not null check(credit_hr between 1 and 3),
+sub_department varchar (30) not null,
+lecturer nvarchar(30),
+_lev int not null,
+semester varchar(10) not null,
+optionarry varchar(10) not null,
+student_id int foreign key(student_id)
+references st_department.student (student_no)
+);
+go
+create table st_department.prerequisite(
+course_id varchar(30) not null foreign key (course_id)
+references st_department.courses (course_no),
+course_na varchar(100) not null,
+preq_no varchar (30) not null,
+preq_name varchar(100) not null
+)
+go
+create table st_department.section(
+section_id varchar (30) primary key not null,
+course_number varchar(30) not null foreign key (course_number)
+references st_department.courses (course_no),
+semester int not null,
+Year_ int not null,
+instructor nvarchar (30) not null,
+level_ int not null
+);
+go
+create table st_department.grade_report(
+student_id int not null foreign key(student_id)
+references st_department.student(student_no),
+section_no varchar(30) not null foreign key (section_no)
+references st_department.section (section_id),
+grade varchar (10)
+)
+go 
+create unique index idx_email_notnull
+on st_department.student(email)
+where email is not null;
+go
+create schema cs_department
+go
+create table cs_department.student(
+full_name nvarchar (100) not null,
+student_no int primary key not null,
+class int not null,
+major varchar (30) not null,
+email varchar (30),
+__level int not null
+);
+go
+create table cs_department.courses(
+course_name varchar (100) not null,
+course_no varchar (30) primary key not null,
+credit_hr int not null check(credit_hr between 1 and 3),
+sub_department varchar (30) not null,
+lecturer nvarchar(30),
+_lev int not null,
+semester varchar(10) not null,
+optionarry varchar(10) not null,
+student_id int foreign key(student_id)
+references cs_department.student (student_no)
+);
+go
+create table cs_department.prerequisite(
+course_id varchar(30) not null foreign key (course_id)
+references cs_department.courses (course_no),
+course_na varchar(100) not null,
+preq_no varchar (30) not null,
+preq_name varchar(100) not null
+)
+go
+create table cs_department.section(
+section_id varchar (30) primary key not null,
+course_number varchar(30) not null foreign key (course_number)
+references cs_department.courses (course_no),
+semester int not null,
+Year_ int not null,
+instructor nvarchar (30) not null,
+level_ int not null
+);
+go
+create table cs_department.grade_report(
+student_id int not null foreign key(student_id)
+references cs_department.student(student_no),
+section_no varchar(30) not null foreign key (section_no)
+references cs_department.section (section_id),
+grade varchar (10)
+)
+go 
+create unique index idx_email_notnull
+on cs_department.student(email)
+where email is not null;
+go
+create schema other_department
+go
+create table other_department.student(
+full_name nvarchar (100) not null,
+student_no int primary key not null,
+class int not null,
+major varchar (30) not null,
+email varchar (30),
+__level int not null
+);
+go
+create table other_department.courses(
+course_name nvarchar (100) not null,
+course_no varchar (30) primary key not null,
+credit_hr int not null check(credit_hr between 1 and 3),
+sub_department varchar (30) not null,
+lecturer nvarchar(30),
+_lev int not null,
+semester varchar(10) not null,
+optionarry varchar(10) not null,
+student_id int foreign key(student_id)
+references other_department.student (student_no)
+);
+go
+create table other_department.prerequisite(
+course_id varchar(30) not null foreign key (course_id)
+references other_department.courses (course_no),
+course_na varchar(100) not null,
+preq_no varchar (30) not null,
+preq_name varchar(100) not null
+)
+go
+create table other_department.section(
+section_id varchar (30) primary key not null,
+course_number varchar(30) not null foreign key (course_number)
+references other_department.courses (course_no),
+semester int not null,
+Year_ int not null,
+instructor nvarchar (30) not null,
+level_ int not null
+);
+go
+create table other_department.grade_report(
+student_id int not null foreign key(student_id)
+references other_department.student(student_no),
+section_no varchar(30) not null foreign key (section_no)
+references other_department.section (section_id),
+grade varchar (10)
+)
+go 
+create unique index idx_email_notnull
+on other_department.student(email)
+where email is not null;
+go
+insert into other_department.courses(course_no,course_name,credit_hr,semester,_lev,sub_department,optionarry)
+values 	('CH1101','General Chemistry (1)',3,'first',1,'chemistry','req'),
+		('MA1101','Mathematics (1)',3,'first',1,'math','req'),
+		('PH1121','Physics (1)',3,'first',1,'physics','req'),
+		('UN1101','Scientific English',2,'first',1,'UN','req'),
+		('PH1125','General Physics',3,'first',1,'physics','optionarry'),
+		('BIO1101','General Biology',3,'first',1,'biology','optionarry'),
+		('TS1103','Mathematical statistics',3,'first',1,'statistics','optionarry'),
+		('CS1101','Programming',3,'first',1,'computer science','optionarry'),
+		('UN1103',N' تاريخ وفلسفة العلوم',1,'first',1,'UN','optionarry'),
+		('UN1105',N'مبادئ اإلدارة والقيادة',1,'first',1,'UN','optionarry'),
+		('UN1107',N'الثقافة البيئية',1,'first',1,'UN','optionarry'),
+		('CH1202','General Chemistry (2)',3,'second',1,'chemistry','req'),
+		('MA1202','Mathematics (2)',3,'second',1,'math','req'),
+		('PH1222','Physics (2)',3,'second',1,'Physics','req'),
+		('UN1202',N'اللغة العربية',2,'second',1,'UN','req'),
+		('CH1204','Tutorial',3,'second',1,'chemistry','optionarry'),
+		('PH1226','Introduction to Biophysics',3,'second',1,'Biophysics','optionarry'),
+		('MA1204','Applied Mathematics',3,'second',1,'math','optionarry'),
+		('MA1206','Algebra',3,'second',1,'math','optionarry'),
+		('UN1204',N'التفكير النقدي',1,'second',1,'UN','optionarry'),
+		('UN1206',N'الثقافة الاسلامية',1,'second',1,'UN','optionarry'),
+		('UN1208',N'التعليم الذاتي',1,'second',1,'UN','optionarry')
+go
+insert into other_department.prerequisite(course_id,course_na,preq_no,preq_name)
+values 	('CH1202','General Chemistry (2)','CH1101','General Chemistry (1)'),
+		('MA1202','Mathematics (2)','MA1101','Mathematics (1)'),
+		('PH1222','Physics (2)','PH1121','Physics (1)'),
+		('CH1204','Tutorial','CH1101','General Chemistry (1)')
+go
+insert into st_department.courses(course_no,course_name,credit_hr,semester,_lev,sub_department,optionarry)
+values 	('ST2101','Probability Theory (1)',3,'first',2,'st','req'),
+		('MA2103','Abstract Algebra& linear Algebra',3,'first',2,'math','req'),
+		('MA2105','Mathematical Analysis (1)',3,'first',2,'math','req'),
+		('ST2103','Sampling Theory',3,'first',2,'st','req'),
+		('TS2101','Transferable skill',1,'first',2,'ts','req'),
+		('ST2107','Applied Statistics',2,'first',2,'st','optionarry'),
+		('CS2103','Computer Programming',3,'first',2,'computer science','optionarry'),
+		('MA2109','Selected topic of Pure Mathematics',3,'first',2,'math','optionarry'),
+		('CS2105','File Processing',2,'first',2,'computer science','optionarry'),
+		('MA2220','Numerical Analysis',3,'second',2,'math','req'),
+		('ST2202','Stochastic Process',3,'second',2,'st','req'),
+		('ST2204','Distribution Theory',3,'second',2,'st','req'),
+		('ST2206','Statistical Inference (1)',3,'second',2,'st','req'),
+		('MA2212','Number Theory',3,'second',2,'math','optionarry'),
+		('CS2204','Data Structure and Algorithms',3,'second',2,'computer science','optionarry'),
+		('ST2208','Mathematical Statistics',3,'second',2,'st','optionarry'),
+		('ST2210','Advanced Probability',3,'second',2,'st','optionarry'),
+		('ST3101','Correlation Theory (1)',3,'first',3,'st','req'),
+		('MA3103','Operation Research (1)',3,'first',3,'math','req'),
+		('ST3121','Probability Theory (2)',3,'first',3,'st','req'),
+		('ST3103','Experimental Design',3,'first',3,'st','req'),
+		('MA3109','Approximation Theory',3,'first',2,'math','optionarry'),
+		('ST3105','Theory of Inventory',3,'first',3,'st','optionarry'),
+		('CS3103','Design and Analysis of Algorithms',2,'first',3,'computer science','optionarry'),
+		('ST3107','Analysis of Categorical Data',3,'first',3,'st','optionarry'),
+		('MA3210','Optimal Control & Functional Analysis',3,'second',3,'math','req'),
+		('ST3202','Regression of Analysis',3,'second',3,'st','req'),
+		('ST3204','Statistical Programs',3,'second',3,'st','req'),
+		('ST3212','Statistical Methods',3,'second',3,'st','req'),
+		('ST3206','Order Statistics',3,'second',3,'st','optionarry'),
+		('ST3208','Theory of Statistical Decision',3,'second',3,'st','optionarry'),
+		('ST3210','Correlation Theory (2)',3,'second',3,'st','optionarry'),
+		('ST3214','Selected Topic in Statistics (1)',3,'second',3,'st','optionarry'),
+		('MA4105','Operation Research (2)',3,'first',4,'math','req'),
+		('ST4101','Non-Parametric Statistics',3,'first',4,'st','req'),
+		('ST4103','Reliability Theory',3,'first',4,'st','req'),
+		('ST4105','Statistical Inference (2)',3,'first',4,'st','req'),
+		('MA4121','Topology',3,'first',4,'math','optionarry'),
+		('MA4123','Complex and Function Analysis',2,'first',4,'math','optionarry'),
+		('CS4121','Simulation technique',2,'first',4,'computer science','optionarry'),
+		('ST4107','Estimation Theory',2,'first',4,'st','optionarry'),
+		('ST4115','Selected Topic in Statistics (2)',3,'first',4,'st','optionarry'),
+		('ST4202','Review Article & Research',2,'second',4,'st','req'),
+		('ST4204','Time Series Analysis',3,'second',4,'st','req'),
+		('ST4206','Multivariate Statistics',3,'second',4,'st','req'),
+		('ST4208','Statistical Data Mining',2,'second',4,'st','req'),
+		('ST4210','Statistical Software',3,'second',4,'st','req'),
+		('ST4212','Statistical Quality Control',2,'second',4,'st','optionarry'),
+		('ST4214','Queuing Theory',2,'second',4,'st','optionarry'),
+		('MA4226','Partial Differential Equations & SpecialFunctions',2,'second',4,'math','optionarry'),
+		('CS4222','Selected Topic in Computer Science',2,'second',4,'computer science','optionarry')
+go
+insert into st_department.prerequisite(course_id,preq_no,course_na,preq_name)
+values	('MA4226','MA2105','Partial Differential Equations & SpecialFunctions','Mathematical Analysis (1)'),
+		('ST4214','ST3212','Queuing Theory','Statistical Methods'),
+		('ST4212','MA3210','Statistical Quality Control','Optimal Control & Functional Analysis'),
+		('ST4210','ST4105','Statistical Software','Operation Research (2)'),
+		('ST4208','ST4105','Statistical Data Mining','Operation Research (2)'),
+		('ST4206','ST3105','Multivariate Statistics','Theory of Inventory'),
+		('ST4204','ST4101','Time Series Analysis','Non-Parametric Statistics'),
+		('ST4107','ST1202','Estimation Theory',''),
+		('MA4123','MA3101','Complex and Function Analysis','Operation Research (1)'),
+		('MA4121','MA2103','Topology','Abstract Algebra& linear Algebra'),
+		('ST4105','ST2206','Statistical Inference (2)','Order Statistics'),
+		('ST4103','ST3101','Reliability Theory','Correlation Theory (1)'),
+		('ST4101','ST2206','Non-Parametric Statistics','Order Statistics'),
+		('MA4105','MA3103','Operation Research (2)','Operation Research (1)'),
+		('ST3210','ST3101','Correlation Theory (2)','Correlation Theory (1)'),
+		('ST3208','ST3101','Theory of Statistical Decision','Correlation Theory (1)'),
+		('ST3206','ST2101','Order Statistics','Probability Theory (1)'),
+		('ST3212','ST3105','Statistical Methods','Theory of Inventory'),
+		('ST3204','ST2202','Statistical Programs','Stochastic Process'),
+		('ST3202','ST3101','Regression of Analysis','Correlation Theory (1)'),
+		('MA3210','MA3103','Optimal Control & Functional Analysis','Operation Research (1)'),
+		('ST3107','ST2206','Analysis of Categorical Data','Statistical Inference (1)'),
+		('CS3103','CS2202','Design and Analysis of Algorithms','Digital Logic and Algorithms'),
+		('ST3105','ST2101','Theory of Inventory','Probability Theory (1)'),
+		('MA3109','MA2208','Approximation Theory','Mathematical Analysis (2)'),
+		('ST3103','ST2206','Experimental Design','Statistical Inference (1)'),
+		('ST3121','ST2101','Probability Theory (2)','Probability Theory (1)'),
+		('ST3101','ST2206','Correlation Theory (1)','Statistical Inference (1)'),
+		('ST2210','ST2101','Advanced Probability','Probability Theory (1)'),
+		('ST2208','ST2103','Mathematical Statistics','Sampling Theory'),
+		('CS2204','CS2103','Data Structure and Algorithms','Computer Programming'),
+		('MA2212','MA2103','Number Theory','Abstract Algebra& linear Algebra'),
+		('ST2206','ST2101','Statistical Inference (1)','Probability Theory (1)'),
+		('ST2204','ST2101','Distribution Theory','Probability Theory (1)'),
+		('ST2202','ST2101','Stochastic Process','Probability Theory (1)'),
+		('MA2220','MA2103','Numerical Analysis','Abstract Algebra& linear Algebra'),
+		('CS2105','CS1101','File Processing','Programming'),
+		('CS2103','CS1101','Computer Programming','Programming'),
+		('ST2107','ST1103','Applied Statistics','Mathematical statistics'),
+		('ST2103','ST1103','Sampling Theory','Mathematical statistics'),
+		('MA2105','MA1202','Mathematical Analysis (1)','Mathematics (2)'),
+		('MA2103','MA1206','Abstract Algebra& linear Algebra','Algebra'),
+		('ST2101','ST1103','Probability Theory (1)','Mathematical statistics')
+go
+insert into math_department.courses(course_no,course_name,credit_hr ,semester,_Lev,sub_department,optionarry)
+values ('MA2101','Applied Mathematics (1) ',3,'first',2,'math','req'),
+		('MA2103','Abstract Algebra',3,'first',2,'math','req'),
+		('MA2105','Mathematical Analysis (1)',3,'first',2,'math','req'),
+		('ST2101','Probability Theory (1)',3,'first',2,'statistic','req'),
+		('MA2107','Discrete Mathematics ',2,'first',2,'math','optionarry'),
+		('CS2103','Computer Programming',3,'first',2,'computer science','optionarry'),
+		('MA2109','Selected topic of Pure Mathematics',3,'first',2,'math','optionarry'),
+		('ST2103','Sampling Theory',2,'first',2,'statistic','optionarry'),
+		('TS2101','Transferable skill',1,'first',2,'TS','req'),
+		('MA2202','Applied Mathematics (2)',3,'second',2,'math','req'),
+		('MA2204','Vector Analysis & Solid Geometry ',3,'second',2,'math','req'),
+		('MA2206','Linear Algebra',3,'second',2,'math','req'),
+		('MA2208','Mathematical Analysis (2) ',3,'second',2,'math','req'),
+		('CS2204','Data Structure and Algorithms',3,'second',2,'computer science','optionarry'),
+		('MA2210','Perturbation Theory',3,'second',2,'math','optionarry'),
+		('MA2212','Number Theory',3,'second',2,'math','optionarry'),
+		('ST2206','Statistical inference (1)',3,'second',2,'statistic','optionarry'),
+		('MA3101 ','Real Analysis (1)',3,'first',3,'math','req'),
+		('MA3103','Numerical Analysis (1) ',3,'first',3,'math','req'),
+		('MA3105','Electromagnetism',3,'first',3,'math','req'),
+		('MA3107','Algebra (1) ',3,'first',3,'math','req'),
+		('MA3109','Approximation Theory',2,'first',3,'math','req'),
+		('MA3111','Special Relativity',3,'first',3,'math','req'),
+		('MA3113','Mathematical Logic & Boolean Algebra ',2,'first',3,'math','req'),
+		('MA3115','Theory of Ordinary Differential Equations',3,'first',3,'math','req'),
+		('MA3202','Analytical Dynamics',3,'second',3,'math','req'),
+		('MA3204','Topology (1)',3,'second',3,'math','req'),
+		('MA3206','Quantum mechanics (1) ',3,'second',3,'math','req'),
+		('MA3208','Mathematical Programming',3,'second',3,'math','req'),
+		('MA3210','Optimal Control(1)',3,'second',3,'math','optionarry'),
+		('MA3212','Special Functions ',3,'second',3,'math','optionarry'),
+		('MA3214','Measure Theory',3,'second',3,'math','optionarry'),
+		('MA3216','Elasticity Theory',3,'second',3,'math','optionarry'),
+		('MA4101 ','Functional Analysis (1)',3,'first',4,'math','req'),
+		('MA4103','Fluid Mechanics (1)',3,'first',4,'math','req'),
+		('MA4105','Operations Research (1)',3,'first',4,'math','req'),
+		('MA4107','Differential Geometry (1) ',3,'first',4,'math','req'),
+		('MA4109','Numerical Analysis (2)',3,'first',4,'math','optionarry'),
+		('MA4111','Topology (2)',2,'first',4,'math','optionarry'),
+		('MA4113','General Theory of Relativity',3,'first',4,'math','optionarry'),
+		('MA4115','Quantum Mechanics (2)',2,'first',4,'math','optionarry'),
+		('MA4202','Complex Analysis',3,'second',4,'math','req'),
+		('MA4204','Algebra (2) ',3,'second',4,'math','req'),
+		('MA4206','Partial differential equations',3,'second',4,'math','req'),
+		('MA4208','Review article and Research',2,'second',4,'math','req'),
+		('MA4210','Fluid Mechanics (2) ',3,'second',4,'math','req'),
+		('MA4212','Differential Geometry (2)',2,'second',4,'math','optionarry'),
+		('MA4214','Functional Analysis (2)',2,'second',4,'math','optionarry'),
+		('MA4216','Real Analysis (2)',2,'second',4,'math','optionarry'),
+		('MA4218','Electrodynamics',2,'second',4,'math','optionarry')  
+		go
+		insert into  math_department.prerequisite(course_id,course_na,preq_no,preq_name)
+values ('MA2101','Applied Mathematics (1)','MA1101','Mathematics (1)'),
+	   ('MA2103','Abstract Algebra','MA1206','Algebra'),
+       ('MA2105','Mathematical Analysis (1) ','MA1202','Mathematics (2) '),
+	   ('ST2101','Probability Theory (1)','ST1101','Mathematics (1) '),
+	   ('MA2107','Discrete Mathematics','MA1206','Algebra '),
+       ('CS2103','Computer Programming ','CS1101','Programming '),
+	   ('ST2103','Sampling Theory','MA1103','Mathematical statistics '),
+	   ('MA2202','Applied Mathematics (2)','MA2101','Applied Mathematics (1) '),
+       ('MA2204','Vector Analysis & Solid Geometry','MA2105','Mathematical Analysis (1)'),
+	   ('MA2206','Linear Algebra ','MA2103','Abstract Algebra'),
+	   ('MA2208','Mathematical Analysis (2)','MA2105','Mathematical Analysis (1)'),
+       ('CS2204','Data Structure and Algorithms','CS2103','Computer Programming'),
+	   ('MA2210','Perturbation Theory','MA1202','Mathematics (2)'),
+	   ('MA2212','Number Theory','MA2103','Abstract Algebra'),
+       ('ST2206','Statistical inference (1)','ST2101','Applied Mathematics (1)'),
+	   ('MA3101','Real Analysis (1)','MA2105','Mathematical Analysis (1) '),
+	   ('MA3103','Numerical Analysis (1) ','MA2208','Mathematical Analysis (2)'),
+	   ('MA3105','Electromagnetism','MA2202','Applied Mathematics (2) '),
+       ('MA3107','Algebra (1)','MA2103','Abstract Algebra'),
+	   ('MA3109','Approximation Theory ','MA2208','Mathematical Analysis (2)'),
+	   ('MA3113','Mathematical Logic & Boolean Algebra ','MA2107','Discrete Mathematics'),
+	   ('MA3115','Theory of Ordinary Differential Equations','MA2208','Mathematical Analysis (2) '),
+       ('MA3202','Analytical Dynamics','MA2208','Mathematical Analysis (2) '),
+	   ('MA3204','Topology (1)','MA3101','Real Analysis (1)'),
+	   ('MA3206','Quantum mechanics (1) ','MA3103','Numerical Analysis (1)'),
+	   ('MA3208','Mathematical Programming','MA1204','Applied Mathematics'),
+       ('MA3210','Optimal Control(1)','MA3103','Numerical Analysis (1)'),
+	   ('MA3212','Special Functions ','MA3101','Real Analysis (1)'),
+	   ('MA3214','Measure Theory','MA3101','Real Analysis (1)'),
+	   ('MA3216','Elasticity Theory','MA2202','Applied Mathematics (2)'),
+       ('MA4101','Functional Analysis (1)','MA3210','Optimal Control(1) '),
+	   ('MA4103','Fluid Mechanics (1)','MA3103','Numerical Analysis (1) '),
+	   ('MA4105','Operations Research (1) ','MA3208','Mathematical Programming'),
+	   ('MA4107','Differential Geometry (1)','MA2204','Vector Analysis & Solid Geometry'),
+       ('MA4109','Numerical Analysis (2)','MA3202','Analytical Dynamics '),
+	   ('MA4111','Topology (2)','MA3204','Topology (1)'),
+	   ('MA4113','General Theory of Relativity ','MA3105','Electromagnetism'),
+	   ('MA4115','Quantum Mechanics (2) ','MA3206','Quantum mechanics (1) '),
+       ('MA4202','Complex Analysis','MA3103','Numerical Analysis (1) '),
+	   ('MA4204','Algebra (2)','MA3204','Topology (1)'),
+	   ('MA4206','Partial differential equations ','MA2208','Mathematical Analysis (2)'),
+	   ('MA4210','Fluid Mechanics (2) ','MA4103','Fluid Mechanics (1)'),
+       ('MA4212','Differential Geometry (2)','MA4107','Differential Geometry (1) '),
+	   ('MA4214','Functional Analysis (2) ','MA4101','Functional Analysis (1) '),
+	   ('MA4216','Real Analysis (2)','MA3101','Real Analysis (1) '),
+	   ('MA4218','Electrodynamics','MA3202','Analytical Dynamics')
+	   go 
+	   insert into cs_department.prerequisite(course_id,course_na,preq_no,preq_name)
+values('CS2103','Computer Programming','CS1101','Programming'),
+	  ('CS2105','File Processing','CS1101','Programming'),
+	  ('MA2103','Abstract Algebra','MA1206','Algebra'),
+	  ('MA2105','Mathematical Analysis (1)','MA1202 ','Mathematics (2) '),
+	  ('MA2107','Discrete Mathematics','MA1206','Algebra'),
+	  ('MA2121','Mathematical methods','MA1101','Mathematics (1)'),
+	  ('ST2101','Probability Theory (1)','ST1101','Statstics1'),
+
+	  ('MA2208','Mathematical Analysis (2)','MA2105','Mathematical Analysis (1)'),
+	  ('MA2220','Linear Algebra & Solid Geometry','MA2105','Mathematical Analysis (1) '),
+	  ('CS2202','Digital Logic and Algorithms','MA1202','Mathematics (2) '),
+	  ('CS2204','Data Structure and Algorithms','CS2103','Computer Programming'),
+	  ('MA2212','Number Theory','CS2103','Computer Programming'),
+	  ('CS2206','Data Basic systems','MA1206','Algebra'),
+	  ('CS2208','Object Oriented Programming ','CS2103','Computer Programming'),
+	  ('ST2206','Statistical Inference (1) ','ST2101','Probability Theory (1) '),
+	 
+	  ('MA3103','Numerical Analysis (1) ','MA2208','Mathematical Analysis (2) '),
+	  ('MA3113','Mathematics Logic & Boolean Algebra','MA2103','Abstract Algebra'),
+	  ('CS3101','Computer Organization & Assembly Language Programming','CS2103','Computer Programming'),
+	  ('CS3103','Design & analysis of Algorithms','CS2204','Data Structure and Algorithms'),
+	  ('MA3121','Real Analysis & Measure Theory','MA2208','Mathematical Analysis '),
+	  ('MA3125','Abstract Algebra & Topology','MA2111','Mathematical methods'),
+	  ('CS3208','Systems Simulation','MA2107','Discrete Mathematics'),
+	  ('CS3204','Operating Systems','CS2202','Digital Logic and Algorithms'),
+	  ('CS3206','Computer Architecture','CS2103','Computer Programming '),
+	  ('MA3210','Optimal Control (1)','MA3103','Numerical Analysis (1) '),
+	  ('CS3210','Systems Analysis & Design','CS2101','Computer Systems'),
+	  ('CS3212','Software Design & Analysis Engineering','CS2204','Data Structure and Algorithms'),
+	  ('ST3212','Stochastic Processes ','ST3105','Combinatorics& Graph Theory'),
+
+	  ('MA4105','Operation Research (1)','MA1204','Applied Mathematics'),
+	  ('CS4101','Data Base Management systems','CS3204','Operating Systems'),
+	  ('CS4105','Computer Graphic ','CS3208','Systems Simulation'),
+	  ('CS4111','Expert Systems','CS3101','Design & analysis of Algorithms'),
+	  ('MA4121','Modern Algebra & Topology','MA3210','Optimal Control (1)'),
+	  ('CS4204','Complier Design ','CS3202','Theory of Automata'),
+	  ('CS4206','Image Processing','CS4105','Computer Graphic'),
+	  ('CS4208','Computer Security Technique','CS4101','Data Base Management systems'),
+	  ('CS4210','Computer Networks ','CS3204','Operating Systems'),
+	  ('MA4224','Optimal Control (2) ','MA3210','Optimal Control (1) '),
+	  ('CS4212','Distributed Systems','CS4101','Data Base Management systems'),
+	  ('CS4214','Neural Networks ','CS4101','Data Base Management systems'),
+	  ('ST4204','Time Series Analysis ','MA4121','Modern Algebra & Topology')
+	  go
+insert into cs_department.courses(course_no,course_name,credit_hr,semester,_Lev,sub_department,optionarry)
+values('CS2101','Computer Systems ',3,'first',2,'CS','req'),
+('CS2103','Computer Programming',3,'first',2,'CS','req'),
+('MA2103','Abstract Algebra',3,'first',2,'CS','req'),
+('MA2105','Mathematical Analysis (1) ',3,'first',2,'CS','req'),
+('TS2103','Transferable Skills ',1,'first',2,'CS','req'),
+('MA2107','Discrete Mathematics ',2,'first',2,'CS','optionarry'),
+('MA2121','Mathematical methods',3,'first',2,'CS','optionarry'),
+('ST2101','Probability Theory (1) ',2,'first',2,'CS','optionarry'),
+('CS2105','File Processing',3,'first',2,'CS','optionarry'),
+
+('MA2208','Mathematical Analysis (2) ',3,'second',2,'math','req'),
+('MA2220','Linear Algebra & Solid Geometry ',3,'second',2,'math','req'),
+('CS2202','Digital Logic and Algorithms  ',3,'second',2,'CS','req'),
+('CS2204','Data Structure and Algorithms ',3,'second',2,'CS','req'),
+('MA2212','Number Theory',3,'second',2,'math','optionarry'),
+('CS2206','Data Basic systems',3,'second',2,'CS','optionarry'),
+('CS2208','Object Oriented Programming  ',3,'second',2,'CS','optionarry'),
+('ST2206','Statistical Inference (1)',3,'second',2,'ST','optionarry'),
+
+('MA3103 ','Numerical Analysis (1)',3,'First',2,'Math','req'),
+('MA3113 ','Mathematics Logic & Boolean Algebra',3,'First',2,'Math','req'),
+('CS3101','Computer Organization & Assembly Language Programming',3,'First',2,'cs','req'),
+('CS3103','Design & analysis of Algorithms',3,'First',2,'cs','req'),
+('MA3121 ','Real Analysis & Measure Theory ',2,'First',2,'math','optionary'),
+('MA3125','Abstract Algebra & Topology',2,'First',2,'Math','optionary'),
+('CS3105','Combinatorics& Graph Theory',3,'First',2,'cs','optionary'),
+('CS3107','Concept of Programming Languages ',3,'First',2,'CS','optionary'),
+
+('CS3202 ','Theory of Automata ',3,'second',3,'cs','req'),
+('CS3204 ','Operating Systems',3,'second',3,'cs','req'),
+('CS3206','Computer Architecture ',3,'second',3,'cs','req'),
+('CS3208','Systems Simulation',3,'second',3,'cs','req'),
+('MA3210','Optimal Control',3,'second',3,'Math','optionary'),
+('CS3210','Systems Analysis & Design',3,'second',3,'cs','optionary'),
+('CS3212','Software Design & Analysis Engineering  ',3,'second',3,'cs','optionary'),
+('ST3212','Stochastic Processes ',3,'second',3,'ST','optionary'),
+
+
+
+
+('MA4105','Operation Research (1)  ',3,'first',4,'CS','req'),
+('CS4101','Data Base Management systems',3,'first',4,'CS','req'),
+('CS4103','Theory of Computation',3,'first',4,'CS','req'),
+('CS4105','Computer Graphic ',3,'first',4,'CS','req'),
+('CS4107','Advanced Programming in Java ',2,'first',4,'CS','optionarry'),
+('CS4109','Selected topic in computer science',2,'first',4,'CS','optionarry'),
+('CS4111','Expert Systems ',3,'first',4,'CS','optionarry'),
+('MA4121','Modern Algebra & Topology ',2,'first',4,'CS','optionarry'),
+
+
+
+('CS4202','Review Article and Research',3,'second',4,'CS','req'),
+('CS4204','Complier Design ',3,'second',4,'CS','req'),
+('CS4206','Image Processing  ',3,'second',4,'CS','req'),
+('CS4208','Computer Security Technique ',3,'second',4,'CS','req'),
+('CS4210','Computer Networks',3,'second',4,'CS','req'),
+('MA4224','Optimal Control (2) ',3,'second',4,'math','optionarry'),
+('CS4212','Distributed Systems ',2,'second',4,'CS','optionarry'),
+('CS4214','Neural Networks ',3,'second',4,'CS','optionarry'),
+('ST4204','time Series Analysis',2,'second',4,'St','optionarry')
